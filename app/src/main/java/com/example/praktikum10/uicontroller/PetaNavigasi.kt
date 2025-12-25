@@ -13,6 +13,7 @@ import com.example.praktikum10.uicontroller.route.DestinasiEdit
 import com.example.praktikum10.uicontroller.route.DestinasiEntry
 import com.example.praktikum10.uicontroller.route.DestinasiHome
 import com.example.praktikum10.view.DetailSiswaScreen
+import com.example.praktikum10.view.EditSiswaScreen
 import com.example.praktikum10.view.EntrySiswaScreen
 import com.example.praktikum10.view.HomeScreen
 
@@ -43,6 +44,11 @@ fun HostNavigasi(
         ) {
             DetailSiswaScreen(navigateToEditItem = { navController.navigate("${DestinasiEdit.route}/$it") },
                 navigateBack = { navController.navigate(DestinasiHome.route) })
+        }
+        composable(DestinasiEdit.routeWithArgs, arguments = listOf(navArgument(DestinasiEdit.itemIdArg){
+            type= NavType.IntType })){
+            EditSiswaScreen(navigateBack = { navController.navigate(DestinasiHome.route)},
+                onNavigateUp = { navController.navigateUp()})
         }
     }
 }
