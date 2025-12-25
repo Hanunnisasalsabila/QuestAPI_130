@@ -9,6 +9,8 @@ interface RepositoryDataSiswa {
     suspend fun postDataSiswa(dataSiswa: DataSiswa) : retrofit2.Response<Void>
 
     suspend fun getSatuSiswa(id:Int) : DataSiswa
+
+    suspend fun editSatuSiswa(id: Int, dataSiswa: DataSiswa): retrofit2.Response<Void>
 }
 
 class JaringanRepositoryDataSiswa(
@@ -21,4 +23,7 @@ class JaringanRepositoryDataSiswa(
         serviceApiSiswa.postSiswa(dataSiswa)
 
     override suspend fun getSatuSiswa(id: Int): DataSiswa = serviceApiSiswa.getSatuSiswa(id)
+
+    override suspend fun editSatuSiswa(id: Int, dataSiswa: DataSiswa): retrofit2.Response<Void> =
+        serviceApiSiswa.editSatuSiswa(id, dataSiswa)
 }
