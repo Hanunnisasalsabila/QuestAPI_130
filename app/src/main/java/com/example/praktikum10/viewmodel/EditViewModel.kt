@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.praktikum10.modeldata.DetailSiswa
 import com.example.praktikum10.modeldata.UIStateSiswa
 import com.example.praktikum10.modeldata.toUiStateSiswa
 import com.example.praktikum10.repositori.RepositoryDataSiswa
@@ -22,6 +23,16 @@ RepositoryDataSiswa) : ViewModel() {
         viewModelScope.launch {
             uiStateSiswa = repositoryDataSiswa.getSatuSiswa(idSiswa)
                 .toUiStateSiswa(true)
+        }
+    }
+    fun updateUiState(detailsSiswa: DetailSiswa) {
+        uiStateSiswa =
+            UIStateSiswa(detailSiswa = detailsSiswa, isEntryValid = validasiInput(detailsSiswa)
+            )
+    }
+    private fun validasiInput(uiState: DetailSiswa = uiStateSiswa.detailSiswa): Boolean {
+        return with(uiState) {
+            nama.isNotBlank() && alamat.isNotBlank() && telpon.isNotBlank()
         }
     }
 }
